@@ -1,0 +1,9 @@
+name: water
+version: 0.1.0
+
+authors:
+  - Shootingfly <xiefei@yolanda.hk>
+
+crystal: 0.31.1
+
+license: MIT
