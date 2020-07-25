@@ -14,20 +14,35 @@ module Water
       @indents << @current_indent
     end
 
-    def l(content)
-      @lines << content.to_s
-      @indents << @current_indent
-    end
-
-    def lm(content : String)
-      content.split("\n").each do |line|
+    def text(content)
+      content.to_s.split("\n").each do |line|
         @lines << line
-        @indents << @current_indent - 1
+        @indents << @current_indent
       end
     end
 
     def strip_attributes(attributes : String)
       attributes == "" ? "" : " #{attributes}"
+    end
+
+    def script(attributes, content)
+      @lines << "<script #{attributes}>#{content}</script>"
+      @indents << @current_indent
+    end
+
+    def script(content)
+      @lines << "<script>#{content}</script>"
+      @indents << @current_indent
+    end
+
+    def style(attributes, content)
+      @lines << "<style #{attributes}>#{content}</style>"
+      @indents << @current_indent
+    end
+
+    def style(content)
+      @lines << "<style>#{content}</style>"
+      @indents << @current_indent
     end
 
     def strip_content(content)

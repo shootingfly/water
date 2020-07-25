@@ -11,13 +11,18 @@ module Water
         @indents << @current_indent
       end
 
-      def {{tag.id}}(content, with attributes = "")
+      def {{tag.id}}(attributes, content)
         @lines << "<{{tag.id}}#{strip_attributes(attributes)}>#{strip_content(content)}</{{tag.id}}>"
+        @indents << @current_indent
+      end
+
+      def {{tag.id}}(content)
+        @lines << "<{{tag.id}}>#{strip_content(content)}</{{tag.id}}>"
         @indents << @current_indent
       end
     end
 
-    OPEN_TAGS = %w(style a abbr address article aside b bdi body button code details dialog div dd dl dt em fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header html i iframe label li main mark menuitem meter nav ol option pre progress rp rt ruby s script section small span strong summary table tbody td textarea th thead time title tr u ul video wbr)
+    OPEN_TAGS = %w(a abbr address article aside b bdi body button code details dialog div dd dl dt em fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header html i iframe label li main mark menuitem meter nav ol option pre progress rp rt ruby s section small span strong summary table tbody td textarea th thead time title tr u ul video wbr)
     {% for tag in OPEN_TAGS %}
       def_open_tag {{tag}}
     {% end %}
@@ -33,8 +38,13 @@ module Water
         @indents << @current_indent
       end
 
-      def {{alias_name.id}}(content, with attributes = "")
+      def {{alias_name.id}}(attributes, content)
         @lines << "<{{tag.id}}#{strip_attributes(attributes)}>#{strip_content(content)}</{{tag.id}}>"
+        @indents << @current_indent
+      end
+
+      def {{alias_name.id}}(content)
+        @lines << "<{{tag.id}}>#{strip_content(content)}</{{tag.id}}>"
         @indents << @current_indent
       end
     end

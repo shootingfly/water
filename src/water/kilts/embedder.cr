@@ -1,5 +1,3 @@
-puts <<-Crystal
-  Water::Page.new do
-    #{File.read(ARGV[0])}
-  end
-Crystal
+puts "Water::Page.new do"
+puts File.read(ARGV[0])
+puts "end"

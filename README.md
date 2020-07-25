@@ -29,47 +29,48 @@ page = Water::Page.new do
   doctype
   html {
     head {
-      meta %(name="viewport" content="width=device-width,initial-scale=1.0")
+      meta %|name="viewport" content="width=device-width,initial-scale=1.0"|
       title "This is a tile"
-      style {
-        lm <<-CSS
-          h1 { color: red; }
-          p { color: green; }
-        CSS
+      style %q{
+        h1 {
+          color: red;
+        }
+
+        p {
+          color: green;
+        }
       }
-      script {
-        lm <<-'JAVASCRIPT'
-          alert("Hello");
-          system.logger("\n");
-        JAVASCRIPT
+      script %q{
+        alert("Hello");
+        system.logger("\n");
       }
-      link %(rel="stylesheet" media="screen")
+      link %|rel="stylesheet" media="screen"|
     }
     body {
-      h1 "This is a water file", with: %(class="Hello")
+      h1 %|class="Hello"|, "This is a water file"
       h2 "This is blue"
-      input %(type="checkbox" checked=false)
-      input %(type="checkbox" checked=true)
-      input %(type="checkbox" checked="checked")
-      span %(id="some-id" class="classname") {
-        div %(id="Hello" class="world world2") {
+      input %|type="checkbox" checked=false|
+      input %|type="checkbox" checked=true|
+      input %|type="checkbox" checked="checked"|
+      span %|id="some-id" class="classname"| {
+        div %|id="Hello" class="world world2"| {
           some_var = "hello world haha"
-          span %(data-some-var="some_var" two-attr="fun") {
-            l "and a hello"
+          span %|data-some-var="some_var" two-attr="fun"| {
+            text "and a hello"
           }
-          span "text inside of &lt;p&gt", with: %(class="deep_nested")
-          lm <<-HTML
-            #{Process.pid}
-            text node
-            other text node
+          span %|class="deep_nested"|, "text inside of &lt;p&gt"
+          text <<-HTML
+          #{Process.pid}
+          text node
+          other text node
           HTML
         }
       }
-      div %(class="row") {
-        div %(class="col-md-9") {
-          numbers = [1, 2]
-          numbers.each do |index|
-            h2 %(class="right_#{index}") {
+      div %|class="row"| {
+        div %|class="col-md-9"| {
+          users = [1, 2]
+          users.each_with_index do |index|
+            h2 %|class="right_#{index}"| {
               div {
                 span "Hello"
               }
@@ -78,7 +79,7 @@ page = Water::Page.new do
         }
       }
       br
-      l "&nbsp;" * 4
+      text "&nbsp;" * 4
       hello_world "Hello"
       span Process.pid
     }
@@ -94,13 +95,18 @@ puts page
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>This is a tile</title>
     <style>
-      h1 { color: red; }
-      p { color: green; }
-    </style>
+        h1 {
+          color: red;
+        }
+
+        p {
+          color: green;
+        }
+      </style>
     <script>
-      alert("Hello");
-      system.logger("\n");
-    </script>
+        alert("Hello");
+        system.logger("\n");
+      </script>
     <link rel="stylesheet" media="screen">
   </head>
   <body>
@@ -115,7 +121,7 @@ puts page
           and a hello
         </span>
         <span class="deep_nested">text inside of &amp;lt;p&amp;gt</span>
-        17925
+        14674
         text node
         other text node
       </div>
@@ -137,7 +143,7 @@ puts page
     <br>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <hello-world>Hello</hello-world>
-    <span>17925</span>
+    <span>14674</span>
   </body>
 </html>
 ```

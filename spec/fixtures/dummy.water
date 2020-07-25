@@ -1,63 +1,63 @@
 doctype
 html {
   head {
-    meta %(name="viewport" content="width=device-width,initial-scale=1.0")
+    meta %|name="viewport" content="width=device-width,initial-scale=1.0"|
     title "This is a title"
-    style {
-      lm <<-CSS
-        h1 {color: red;}
-        p {color: green;}
-      CSS
-    }
-    style "h2 {color: blue;}"
+    style "
+      h1 {
+        color: red;
+      }
+
+      p {
+        color: green;
+      }
+    "
   }
   body {
-    lm <<-HTML
-      <!--Visible multi-line comment
-            <span>this is wrapped in a comment</span>
-          -->
-      <!--[if IE]>
-            <p>Dat browser is old.</p>
-          <![endif]-->
+    text <<-HTML
+    <!--Visible multi-line comment
+          <span>this is wrapped in a comment</span>
+        -->
+    <!--[if IE]>
+          <p>Dat browser is old.</p>
+        <![endif]-->
     HTML
     h1 "This is a water file"
     h2 "This is blue"
-    input %(type="checkbox")
-    input %(type="checkbox" checked)
-    input %(type="checkbox" checked="checked")
-    span %(id="some-id" class="classname") {
-      div %(id="hello" class="world world2") {
+    input %|type="checkbox"|
+    input %|type="checkbox" checked|
+    input %|type="checkbox" checked="checked"|
+    span %|id="some-id" class="classname"| {
+      div %|id="hello" class="world world2"| {
         span {
-          span "and a hello", with: %(data-some-var="hello world haha" two-attr="fun")
+          span %|data-some-var="hello world haha" two-attr="fun"|, "and a hello"
           span {
-            span %(class="deep_nested") {
+            span %|class="deep_nested"| {
               para {
-                l "text inside of &lt;p&gt;"
+                text "text inside of &lt;p&gt;"
               }
-              lm <<-HTML
-                18276
-                text node
-                other text node
+              text <<-HTML
+              18276
+              text node
+              other text node
               HTML
             }
           }
         }
-        span %(class="alongside" pid="18276") {
-          div %(id="with-id" pid="18276") {
+        span %|class="alongside" pid="18276"| {
+          div %|id="with-id" pid="18276"| {
             span "ah"
             span "oh"
           }
         }
       }
     }
-    div %(id="amazing-div" some-attr="hello") {}
-    l "<!--This is a visible comment-->"
-    script "var num1 = 8*4;"
-    script {
-      lm <<-JAVASCRIPT
-        var num2 = 8 * 3;
-        alert("8 * 3 + 8 * 4 = " + (num1 + num2));
-      JAVASCRIPT
-    }
+    div %|id="amazing-div" some-attr="hello"| { }
+    text "<!--This is a visible comment-->"
+    script %|type="text/script"|, "var num1 = 8*4;"
+    script %|
+      var num2 = 8 * 3;
+      alert("8 * 3 + 8 * 4 = " + (num1 + num2));
+    |
   }
 }
