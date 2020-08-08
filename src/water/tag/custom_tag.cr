@@ -1,8 +1,8 @@
-module Water
+class Water
   module CustomTag
     macro def_custom_tag(tag)
-      def {{tag.id}}(attributes = "")
-        @lines << "<{{tag.id.gsub(/_/, "-")}}#{strip_attributes(attributes)}>"
+      def {{tag.id}}
+        @lines << "<{{tag.id.gsub(/_/, "-")}}>"
         @indents << @current_indent
         @current_indent += 1
         yield
@@ -11,8 +11,18 @@ module Water
         @indents << @current_indent
       end
 
-      def {{tag.id}}(attributes, content)
-        @lines << "<{{tag.id.gsub(/_/, "-")}}#{strip_attributes(attributes)}>#{strip_content(content)}</{{tag.id.gsub(/_/, "-")}}>"
+      def {{tag.id}}(attributes : String)
+        @lines << "<{{tag.id.gsub(/_/, "-")}} #{attributes}>"
+        @indents << @current_indent
+        @current_indent += 1
+        yield
+        @current_indent -= 1
+        @lines << "</{{tag.id.gsub(/_/, "-")}}>"
+        @indents << @current_indent
+      end
+
+      def {{tag.id}}(attributes : String, content)
+        @lines << "<{{tag.id.gsub(/_/, "-")}} #{attributes}>#{strip_content(content)}</{{tag.id.gsub(/_/, "-")}}>"
         @indents << @current_indent
       end
 

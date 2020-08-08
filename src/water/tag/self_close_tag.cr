@@ -1,15 +1,13 @@
-module Water
+class Water
   module SelfCloseTag
     macro def_self_close_tag(tag)
-      def {{tag.id}}(attributes = "")
-        @lines << "<{{tag.id}}#{strip_attributes(attributes)}>"    
+      def {{tag.id}}
+        @lines << "<{{tag.id}}>"
         @indents << @current_indent
       end
-    end
 
-    macro def_renamed_self_close_tag(tag, alias_name)
-      def {{tag.id}}(attributes = "")
-        @lines << "<{{tag.id}}#{strip_attributes(attributes)}>"    
+      def {{tag.id}}(attributes : String)
+        @lines << "<{{tag.id}} #{attributes}>"
         @indents << @current_indent
       end
     end

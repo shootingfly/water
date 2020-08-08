@@ -3,7 +3,7 @@ require "./tag/self_close_tag"
 require "./tag/custom_tag"
 require "html"
 
-module Water
+class Water
   module Tag
     include Water::OpenTag
     include Water::SelfCloseTag
@@ -19,10 +19,6 @@ module Water
         @lines << line
         @indents << @current_indent
       end
-    end
-
-    def strip_attributes(attributes : String)
-      attributes == "" ? "" : " #{attributes}"
     end
 
     def script(attributes, content)

@@ -21,11 +21,11 @@ A library for writing HTML in plain Crystal.
 ```crystal
 require "water"
 
-class Water::Page
+class Water
   def_custom_tag hello_world
 end
 
-page = Water::Page.new do
+page = Water.new do
   doctype
   html {
     head {
@@ -147,6 +147,9 @@ puts page
   </body>
 </html>
 ```
+
+## Note
+Because `p` and `select` are used by Crystal. tag `p` is renamed to `para`, tag `select` is renamed to `select_tag`.
 
 ## Contributing
 

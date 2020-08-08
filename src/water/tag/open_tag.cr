@@ -1,23 +1,35 @@
-module Water
+class Water
   module OpenTag
-    macro def_open_tag(tag)
-      def {{tag.id}}(attributes = "")
-        @lines << "<{{tag.id}}#{strip_attributes(attributes)}>"
+    macro def_open_tag(tag, alias_name = nil)
+      {% real_tag = alias_name || tag %}
+
+      def {{tag.id}}
+        @lines << "<{{real_tag.id}}>"
         @indents << @current_indent
         @current_indent += 1
         yield
         @current_indent -= 1
-        @lines << "</{{tag.id}}>"
+        @lines << "</{{real_tag.id}}>"
         @indents << @current_indent
       end
 
-      def {{tag.id}}(attributes, content)
-        @lines << "<{{tag.id}}#{strip_attributes(attributes)}>#{strip_content(content)}</{{tag.id}}>"
+      def {{tag.id}}(attributes : String)
+        @lines << "<{{real_tag.id}} #{attributes}>"
+        @indents << @current_indent
+        @current_indent += 1
+        yield
+        @current_indent -= 1
+        @lines << "</{{real_tag.id}}>"
+        @indents << @current_indent
+      end
+
+      def {{tag.id}}(attributes : String, content)
+        @lines << "<{{real_tag.id}} #{attributes}>#{strip_content(content)}</{{real_tag.id}}>"
         @indents << @current_indent
       end
 
       def {{tag.id}}(content)
-        @lines << "<{{tag.id}}>#{strip_content(content)}</{{tag.id}}>"
+        @lines << "<{{real_tag.id}}>#{strip_content(content)}</{{real_tag.id}}>"
         @indents << @current_indent
       end
     end
@@ -27,29 +39,7 @@ module Water
       def_open_tag {{tag}}
     {% end %}
 
-    macro def_renamed_open_tag(tag, alias_name)
-      def {{alias_name.id}}(attributes = "")
-        @lines << "<{{tag.id}}#{strip_attributes(attributes)}>"
-        @indents << @current_indent
-        @current_indent += 1
-        yield
-        @current_indent -= 1
-        @lines << "</{{tag.id}}>"
-        @indents << @current_indent
-      end
-
-      def {{alias_name.id}}(attributes, content)
-        @lines << "<{{tag.id}}#{strip_attributes(attributes)}>#{strip_content(content)}</{{tag.id}}>"
-        @indents << @current_indent
-      end
-
-      def {{alias_name.id}}(content)
-        @lines << "<{{tag.id}}>#{strip_content(content)}</{{tag.id}}>"
-        @indents << @current_indent
-      end
-    end
-
-    def_renamed_open_tag "p", "para"
-    def_renamed_open_tag "select", "select_tag"
+    def_open_tag "para", "p"
+    def_open_tag "select_tag", "select"
   end
 end
