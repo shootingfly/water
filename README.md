@@ -1,6 +1,7 @@
 # Water : HTML in plain Crystal
 
-[![Build Status](https://travis-ci.org/shootingfly/water.svg?branch=master)](https://travis-ci.org/shootingfly/water)[![GitHub release](https://img.shields.io/github/release/shootingfly/water.svg)](https://github.com/shootingfly/water/releases)
+[![Crystal CI](https://github.com/shootingfly/water/actions/workflows/crystal.yml/badge.svg)](https://github.com/shootingfly/water/actions/workflows/crystal.yml)
+[![GitHub release](https://img.shields.io/github/release/shootingfly/water.svg)](https://github.com/shootingfly/water/releases)
 
 A library for writing HTML in plain Crystal.
 
